@@ -35,9 +35,5 @@
 				"PanicHD\\PanicHD\\PanicHDServiceProvider"
 			]
 		}
-	},
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/PROFeNoM/panichd.git"
+	}
 }
