@@ -143,8 +143,8 @@ return [
     'filter-agent'                     => 'Agent',
     'filter-agent-all'                 => 'Tous',
 
-    'btn-add'                          => 'Add',
-    'btn-change'                       => 'Change',
+    'btn-add'                          => 'Ajouter',
+    'btn-change'                       => 'Changer',
     'btn-download'                     => 'Télécharger',
 
     // Vocabulary
