@@ -9,12 +9,11 @@ use PanicHD\PanicHD\Models\Status;
 class BasicStatuses extends Seeder
 {
     public $statuses = [
-        'New'              => '#319df8',
-        'Open'             => '#ffbc1b',
-        'Customer pending' => '#df32f9',
-        'Pending by other' => '#df32f9',
-        'Resolved'         => '4bcd540',
-        'Dismissed'        => '#858585',
+        'Nouveau'       => '#319df8',
+        'Ouvert'        => '#ffbc1b',
+        'En attente'    => '#df32f9',
+        'Résolu'        => '4bcd540',
+        'Rejeté'        => '#858585',
     ];
 
     /**

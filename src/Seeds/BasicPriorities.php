@@ -9,16 +9,16 @@ use PanicHD\PanicHD\Models\Priority;
 class BasicPriorities extends Seeder
 {
     public $priorities = [
-        'Critical' => [
+        'Critique' => [
             'color'     => '#cc0000',
             'magnitude' => '4', ],
-        'High' => [
+        'Haute' => [
             'color'     => '#ffbc1b',
             'magnitude' => '3', ],
-        'Normal' => [
+        'Normale' => [
             'color'     => '#aaa',
             'magnitude' => '2', ],
-        'Low' => [
+        'Basse' => [
             'color'     => '#4bcd54',
             'magnitude' => '1', ],
     ];
