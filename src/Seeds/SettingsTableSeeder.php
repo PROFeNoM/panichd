@@ -132,32 +132,32 @@ class SettingsTableSeeder extends Seeder
              * Default: 'yes'
              * not to notify agent: 'no'
              */
-            'assigned_notification' => 'yes',
+            'assigned_notification' => 'no',
 
             /*
              * Comment notification: Send notification when new comment is posted
              * Default is send notification: 'yes'
              * Do not send notification: 'no'
              */
-            'comment_notification' => 'yes',
+            'comment_notification' => 'no',
 
             /*
              * Status notification: Send email notification to ticket owner/Agent when ticket status is changed
              * Default: 'yes'
              */
-            'status_notification' => 'yes',
+            'status_notification' => 'no',
 
             /*
             * Notify owner when ticket list changes (between active and complete only)
             * Default: 'yes'
             */
-            'list_owner_notification' => 'yes',
+            'list_owner_notification' => 'no',
 
             /*
             * Notify owner when ticket status changes
             * Default: 'yes'
             */
-            'status_owner_notification' => 'yes',
+            'status_owner_notification' => 'no',
 
             /*
              * The default priority for new tickets
