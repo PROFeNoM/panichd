@@ -6,7 +6,7 @@ return [
   *  Constants
   */
 
-    'nav-new-tickets'                  => 'Nouveeau',
+    'nav-new-tickets'                  => 'Nouveau',
     'nav-new-tickets-title'            => 'Nouveau ticket',
     'nav-new-dd-list'                  => 'Liste',
     'nav-new-dd-list-title'            => 'Liste des nouveaux tickets',
