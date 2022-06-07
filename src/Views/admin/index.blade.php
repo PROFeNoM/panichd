@@ -20,7 +20,7 @@
         <div class="row mb-2">
             @foreach ($a_cards as $card)
                 <div class="col-sm-6 col-lg-3">
-                    <div class="media {{ $card['class'] }}" href="{{ url($card['href']) }}">
+                    <div class="media {{ $card['class'] }}" onclick="location.href='{{ url($card['href']) }}';">
                         <i class="mr-3 fa fa-{{ $card['icon'] }}" style="font-size: 2.5em; margin: 0.5em"></i>
                         <div class="media-body align-self-center mr-2">
                             {!! $card['body'] !!}
