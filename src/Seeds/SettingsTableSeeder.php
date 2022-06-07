@@ -173,12 +173,12 @@ class SettingsTableSeeder extends Seeder
              * The default closing status for tickets
              * Default: false
              */
-            'default_close_status_id' => false,
+            'default_close_status_id' => 4,
             /*
              * The default reopening status for tickets
              * Default: false
              */
-            'default_reopen_status_id' => false,
+            'default_reopen_status_id' => 1,
 
             /*
              * Define the behavior related to default_status_id. If enabled, it allows to edit a ticket using "Newest" list or the status == default_status_id
