@@ -33,6 +33,7 @@ class Basic extends Seeder
         foreach ($this->categories as $name => $color) {
             $category = Category::firstOrNew(['name'  => $name]);
             $category->color = $color;
+            $category->save();
 
             // Create category's tags
             foreach ($this->tags as $tag) {
@@ -53,8 +54,6 @@ class Basic extends Seeder
                 ]);
                 $ordering++;
             }
-
-            $category->save();
         }
 
         // Create priorities
