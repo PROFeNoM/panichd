@@ -485,7 +485,7 @@ return [
 
     'searchform-btn-submit'           => 'Chercher',
 
-    'searchform-validation-no-field'  => 'Aucun champ n\' été introduit',
+    'searchform-validation-no-field'  => 'Aucun champ n\'a été introduit',
     'searchform-validation-success'   => ':num champs de recherche enregistrés',
 
     'searchform-results-title'        => 'Résultats de la recherche',
