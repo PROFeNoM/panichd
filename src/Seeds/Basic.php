@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use PanicHD\PanicHD\Models\Category;
 
+use App\User;
+
 class Basic extends Seeder
 {
     public $categories = [
@@ -28,6 +30,14 @@ class Basic extends Seeder
     public function run()
     {
         Model::unguard();
+
+        // Retrieve super-admin users and set panich_admin and panichd_agent to 1
+        $super_admins = User::where('role_slug', 'super-admin')->get();
+        foreach ($super_admins as $super_admin) {
+            $super_admin->panich_admin = 1;
+            $super_admin->panichd_agent = 1;
+            $super_admin->save();
+        }
 
         // Create categories
         foreach ($this->categories as $name => $color) {
