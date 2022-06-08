@@ -17,10 +17,22 @@ class Basic extends Seeder
         'Autre' => '#4e00ff',
     ];
 
-    public $tags = ['e-mail', 'matériel', 'internet', 'SAP', 'logiciel', 'fournisseur', 'article', 'appro', 'finance', 'logistique', 'televente', 'autre'];
-    public $a_bg_color = ['#e6b8af', '#f4cccc', '#fce5cd', '#fff2cc', '#d9ead3', '#d0e0e3', '#c9daf8', '#cfe2f3', '#d9d2e9', '#ead1dc'];
+    public $tags = [
+        'e-mail', 'matériel', 'internet', 'SAP', 'logiciel',
+        'fournisseur', 'article', 'appro', 'finance', 'logistique',
+        'televente', 'autre'
+    ];
 
-    public $closing_reasons = ['erreur utilisateur', 'erreur logicielle', 'erreur matérielle', 'aucune réponse', 'résolu', 'autre'];
+    public $a_bg_color = [
+        '#e6b8af', '#f4cccc', '#fce5cd', '#fff2cc',
+        '#d9ead3', '#d0e0e3', '#c9daf8', '#cfe2f3',
+        '#d9d2e9', '#ead1dc'
+    ];
+
+    public $closing_reasons = [
+        'erreur utilisateur', 'erreur logicielle', 'erreur matérielle',
+        'aucune réponse', 'résolu', 'autre'
+    ];
 
     /**
      * Run the database seeds.
@@ -48,9 +60,9 @@ class Basic extends Seeder
             // Create category's tags
             foreach ($this->tags as $tag) {
                 $category->tags()->create([
-                    'name' => $tag,
-                    'bg_color' => $this->a_bg_color[array_rand($this->a_bg_color)],
-                    'text_color' => '#0c343d',
+                    'name'          => $tag,
+                    'bg_color'      => $this->a_bg_color[array_rand($this->a_bg_color)],
+                    'text_color'    => '#0c343d',
                 ]);
             }
 
@@ -59,11 +71,20 @@ class Basic extends Seeder
             foreach ($this->closing_reasons as $reason) {
                 $category->closingReasons()->create([
                     'text' => $reason,
-                    'category_id' => $category->id,
-                    'ordering' => $ordering,
-                    'status_id' => 4 // /!\ I ASSUME THE STATUS 'Résolu' IS ALWAYS THE 4TH ID IN THE DB /!\
+                    'category_id'   => $category->id,
+                    'ordering'      => $ordering,
+                    'status_id'     => 4 // /!\ I ASSUME THE STATUS 'Résolu' IS ALWAYS THE 4TH ID IN THE DB /!\
                 ]);
                 $ordering++;
+            }
+
+            // Associate super-admins to the category
+            foreach ($super_admins as $super_admin) {
+                $category->agents()->create([
+                    'category_id'   => $category->id,
+                    'user_id'       => $super_admin->id,
+                    'autoassign'    => 1
+                ]);
             }
         }
 
