@@ -16,14 +16,12 @@ class UpdatePanichdDepartmentsRename extends Migration
     {
         Schema::dropIfExists('ticketit_departments_persons');
 
-        if (Schema::hasTable('ticketit_departments')) {
-            Schema::rename('ticketit_departments', 'panichd_departments');
+        Schema::rename('ticketit_departments', 'panichd_departments');
 
-            foreach (Department::whereNotNull('sub1')->get() as $dep) {
-                $dep->department = $dep->sub1;
-                $dep->shortening = null;
-                $dep->save();
-            }
+        foreach (Department::whereNotNull('sub1')->get() as $dep) {
+            $dep->department = $dep->sub1;
+            $dep->shortening = null;
+            $dep->save();
         }
 
         if (Schema::hasColumn('panichd_departments', 'department')) {
@@ -43,9 +41,7 @@ class UpdatePanichdDepartmentsRename extends Migration
      */
     public function down()
     {
-        if (Schema::hasTable('panichd_departments')) {
-            Schema::rename('panichd_departments', 'ticketit_departments');
-        }
+        Schema::rename('panichd_departments', 'ticketit_departments');
 
         Schema::table('ticketit_departments', function (Blueprint $table) {
             $table->renameColumn('name', 'department');

@@ -429,7 +429,7 @@ trait MemberTrait
                 return $query->where('id', $id);
             }
         } else {
-            return false;
+            return $query->where('id', '0');
         }
     }
 
@@ -499,5 +499,4 @@ trait MemberTrait
             return $member_department->get()->merge($member_department->ancestor()->get());
         }
     }
-
 }
