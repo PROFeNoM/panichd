@@ -10,22 +10,24 @@
     @if($tickets_count)
         <?php
             $a_cards = [
-                ['class' => 'bg-light', 'icon' => 'book', 'body' => '<h2>' . $tickets_count . '<small>' . trans('panichd::admin.index-total-tickets') . '</small></h2>'],
-                ['class' => 'text-white bg-info', 'icon' => 'certificate', 'body' => '<h2 class="text-white">' . $a_tickets_count['newest'] . '<small>' . trans('panichd::admin.index-newest-tickets') . '</small></h2>'],
-                ['class' => 'text-white bg-warning', 'icon' => 'file', 'body' => '<h2 class="text-white">' . $a_tickets_count['active'] . '<small>' . trans('panichd::admin.index-active-tickets') . '</small></h2>'],
-                ['class' => 'text-white bg-success', 'icon' => 'check-circle', 'body' => '<h2 class="text-white">' . $a_tickets_count['complete'] . '<small>' . trans('panichd::admin.index-complete-tickets') . '</small></h2>'],
+                ['class' => 'bg-light', 'href' => '/panichd/dashboard', 'icon' => 'book', 'body' => '<h2>' . $tickets_count . '<small>' . trans('panichd::admin.index-total-tickets') . '</small></h2>'],
+                ['class' => 'text-white bg-info', 'href' => '/tickets/newest', 'icon' => 'certificate', 'body' => '<h2 class="text-white">' . $a_tickets_count['newest'] . '<small>' . trans('panichd::admin.index-newest-tickets') . '</small></h2>'],
+                ['class' => 'text-white bg-warning', 'href' => '/tickets', 'icon' => 'file', 'body' => '<h2 class="text-white">' . $a_tickets_count['active'] . '<small>' . trans('panichd::admin.index-active-tickets') . '</small></h2>'],
+                ['class' => 'text-white bg-success', 'href' => '/tickets/complete', 'icon' => 'check-circle', 'body' => '<h2 class="text-white">' . $a_tickets_count['complete'] . '<small>' . trans('panichd::admin.index-complete-tickets') . '</small></h2>'],
             ];
 
         ?>
         <div class="row mb-2">
             @foreach ($a_cards as $card)
                 <div class="col-sm-6 col-lg-3">
-                    <div class="media {{ $card['class'] }}">
-                        <i class="mr-3 fa fa-{{ $card['icon'] }}" style="font-size: 2.5em; margin: 0.5em"></i>
-                        <div class="media-body align-self-center mr-2">
-                            {!! $card['body'] !!}
+                    <a href="http://{{ url($card['href']) }}">
+                        <div class="media {{ $card['class'] }}">
+                            <i class="mr-3 fa fa-{{ $card['icon'] }}" style="font-size: 2.5em; margin: 0.5em"></i>
+                            <div class="media-body align-self-center mr-2">
+                                {!! $card['body'] !!}
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             @endforeach
         </div>
