@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use PanicHD\PanicHD\Models\Category;
 
-use App\User;
+use App\Models\User;
 
 class Basic extends Seeder
 {
