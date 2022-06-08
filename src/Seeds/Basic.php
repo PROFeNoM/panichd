@@ -81,7 +81,7 @@ class Basic extends Seeder
 
             // Associate super-admins to the category
             foreach ($super_admins as $super_admin) {
-                $super_admin->categories()->sync([$category->id => ['autoassign' => 1]]);
+                $super_admin->categories()->sync([$super_admin->id => [$category->id => ['auto_assign' => 1]]]);
             }
         }
 
