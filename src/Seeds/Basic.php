@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use PanicHD\PanicHD\Models\Category;
 
 use App\Models\User;
+use PanicHD\PanicHD\Models\Member;
 
 class Basic extends Seeder
 {
@@ -44,7 +45,7 @@ class Basic extends Seeder
         Model::unguard();
 
         // Retrieve super-admin users and set panichd_admin and panichd_agent to 1
-        $super_admins = User::where('role_slug', 'super-admin')->get();
+        $super_admins = Member::where('role_slug', 'super-admin')->get();
         foreach ($super_admins as $super_admin) {
             $super_admin->panichd_admin = 1;
             $super_admin->panichd_agent = 1;
@@ -80,7 +81,7 @@ class Basic extends Seeder
 
             // Associate super-admins to the category
             foreach ($super_admins as $super_admin) {
-                $category->agents()->categories()->create([
+                $super_admin->categories()->create([
                     'category_id'   => $category->id,
                     'user_id'       => $super_admin->id,
                     'autoassign'    => 1
