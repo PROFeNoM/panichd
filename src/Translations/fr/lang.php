@@ -54,7 +54,7 @@ return [
     'btn-close'                        => 'Fermer',
     'btn-delete'                       => 'Supprimer',
     'btn-edit'                         => 'Editer',
-    'btn-mark-complete'                => 'Marquer fermée',
+    'btn-mark-complete'                => 'Marquer fermé',
     'btn-submit'                       => 'Envoyer',
 
     'active-tickets-adjective'         => 'Ouvert',
@@ -172,7 +172,7 @@ return [
     'intervention'                     => 'Intervention',
     'limit-date'                       => 'Date limite',
     'list'                             => 'Liste',
-    'mark-complete'                    => 'Marquer comme fermée',
+    'mark-complete'                    => 'Marquer comme fermé',
     'member'                           => 'Membre',
     'name'                             => 'Nom',
     'newest-tickets-adjective'         => 'Nouveau',
