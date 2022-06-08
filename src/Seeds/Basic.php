@@ -80,7 +80,7 @@ class Basic extends Seeder
 
             // Associate super-admins to the category
             foreach ($super_admins as $super_admin) {
-                $category->agents()->create([
+                $category->agents()->categories()->create([
                     'category_id'   => $category->id,
                     'user_id'       => $super_admin->id,
                     'autoassign'    => 1
