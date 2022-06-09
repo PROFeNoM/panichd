@@ -100,7 +100,7 @@
 					@if ($comment->type=='note')
                         @include('panichd::tickets.partials.comments.modal_edit')
                         <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#comment-modal-edit-{{$comment->id}}">{{ trans('panichd::lang.btn-edit') }}</button>
-					@elseif($comment->type=='reply')
+					@elseif($comment->type=='reply' && $setting->grab('assigned_notification') == 'yes')
                         @include('panichd::tickets.partials.comments.modal_resend_emails')
                         <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#email-resend-modal-{{$comment->id}}">{{ trans('panichd::lang.show-ticket-email-resend') }}</button>
 					@endif
