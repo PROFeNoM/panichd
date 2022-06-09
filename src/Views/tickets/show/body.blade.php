@@ -11,39 +11,41 @@
 
 			<div class="text-right">
 				@if ($u->id == $ticket->agent_id)
-					{{-- For assigned agent: Mark ticket as read / unread --}} 
-					<button class="btn btn-light unread_toggle tooltip-info" style="color: #aaa" data-ticket_id="{{ $ticket->id }}" data-toggle="tooltip" title="{{ $ticket->read_by_agent == "2" ? trans('panichd::lang.mark-as-read') : trans('panichd::lang.mark-as-unread') }}">
-						<i class="fas {{ ($ticket->read_by_agent == "2" ? 'fa-user-lock' : ($ticket->read_by_agent == "1" ? 'fa-user' : 'fa-user-edit')) }}"></i>
-					</button>
-				@endif
-				@if ($u->currentLevel() > 1)
-					<a href="{{ route($setting->grab('main_route').'.hide', ['value' => $ticket->hidden ? 'false' : 'true', 'ticket'=>$ticket->id]) }}" class="btn btn-light tooltip-info" style="border: none; color: #aaa;" data-toggle="tooltip" data-placement="top" title="{{ trans('panichd::lang.ticket-hidden-button-title') }}">{!! $ticket->hidden ? '<span class="fa fa-eye-slash"></span> '.trans('panichd::lang.ticket-hidden') : '<span class="fa fa-eye"></span> '.trans('panichd::lang.ticket-visible') !!}</a>
-				@endif
-				@if ($ticket->updated_at!=$ticket->created_at)
-					<span class="tooltip-info" data-toggle="tooltip" data-placement="top" title="{{ trans('panichd::lang.updated-date', [
-						'date' => \Carbon\Carbon::parse($ticket->updated_at)->format(trans('panichd::lang.datetime-format'))
-					]) }}" style="display: inline-block; color: #aaa; cursor: help">
-						<span class="fa fa-pencil-alt"></span> {{ $ticket->updated_at->diffForHumans() }}
-					</span>
-				@endif
-				<span class="tooltip-info" data-toggle="tooltip" data-placement="top" title="{{ trans('panichd::lang.creation-date', [
-						'date' => \Carbon\Carbon::parse($ticket->created_at)->format(trans('panichd::lang.datetime-format'))
-					]) }}" style="display: inline-block; color: #aaa; cursor: help">
-					<span class="fa fa-certificate"></span> {{ $ticket->created_at->diffForHumans() }}
-				</span>&nbsp;
+					{{-- For assigned agent: Mark ticket as read / unread --}}
+					{{--
+                        <button class="btn btn-light unread_toggle tooltip-info" style="color: #aaa" data-ticket_id="{{ $ticket->id }}" data-toggle="tooltip" title="{{ $ticket->read_by_agent == "2" ? trans('panichd::lang.mark-as-read') : trans('panichd::lang.mark-as-unread') }}">
+                            <i class="fas {{ ($ticket->read_by_agent == "2" ? 'fa-user-lock' : ($ticket->read_by_agent == "1" ? 'fa-user' : 'fa-user-edit')) }}"></i>
+                        </button>
+                    --}}
+                    @endif
+                    @if ($u->currentLevel() > 1)
+                        <a href="{{ route($setting->grab('main_route').'.hide', ['value' => $ticket->hidden ? 'false' : 'true', 'ticket'=>$ticket->id]) }}" class="btn btn-light tooltip-info" style="border: none; color: #aaa;" data-toggle="tooltip" data-placement="top" title="{{ trans('panichd::lang.ticket-hidden-button-title') }}">{!! $ticket->hidden ? '<span class="fa fa-eye-slash"></span> '.trans('panichd::lang.ticket-hidden') : '<span class="fa fa-eye"></span> '.trans('panichd::lang.ticket-visible') !!}</a>
+                    @endif
+                    @if ($ticket->updated_at!=$ticket->created_at)
+                        <span class="tooltip-info" data-toggle="tooltip" data-placement="top" title="{{ trans('panichd::lang.updated-date', [
+                            'date' => \Carbon\Carbon::parse($ticket->updated_at)->format(trans('panichd::lang.datetime-format'))
+                        ]) }}" style="display: inline-block; color: #aaa; cursor: help">
+                            <span class="fa fa-pencil-alt"></span> {{ $ticket->updated_at->diffForHumans() }}
+                        </span>
+                    @endif
+                    <span class="tooltip-info" data-toggle="tooltip" data-placement="top" title="{{ trans('panichd::lang.creation-date', [
+                            'date' => \Carbon\Carbon::parse($ticket->created_at)->format(trans('panichd::lang.datetime-format'))
+                        ]) }}" style="display: inline-block; color: #aaa; cursor: help">
+                        <span class="fa fa-certificate"></span> {{ $ticket->created_at->diffForHumans() }}
+                    </span>&nbsp;
 
-				@if($u->isAdmin())
-					@if($setting->grab('delete_modal_type') == 'builtin')
-						{!! link_to_route(
-										$setting->grab('main_route').'.destroy', trans('panichd::lang.btn-delete'), $ticket->id,
-										[
-										'class' => 'btn btn-light deleteit',
-										'form' => "delete-ticket-$ticket->id",
-										"node" => $ticket->subject
-										])
-						!!}
-					@elseif($setting->grab('delete_modal_type') == 'modal')
-					{{-- // OR; Modal Window: 1/2 --}}
+                    @if($u->isAdmin())
+                        @if($setting->grab('delete_modal_type') == 'builtin')
+                            {!! link_to_route(
+                                            $setting->grab('main_route').'.destroy', trans('panichd::lang.btn-delete'), $ticket->id,
+                                            [
+                                            'class' => 'btn btn-light deleteit',
+                                            'form' => "delete-ticket-$ticket->id",
+                                            "node" => $ticket->subject
+                                            ])
+                            !!}
+                        @elseif($setting->grab('delete_modal_type') == 'modal')
+                        {{-- // OR; Modal Window: 1/2 --}}
 						{!! CollectiveForm::open(array(
 								'route' => array($setting->grab('main_route').'.destroy', $ticket->id),
 								'method' => 'delete',
