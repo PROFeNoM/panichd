@@ -77,11 +77,9 @@
                 <span class="fa fa-times" aria-label="{{ trans('panichd::lang.btn-delete') }}" style="color: gray"></span></button>
             @endif
 		  </span>
-			{{--
 		  @if($u->id == $ticket->agent_id && $comment->read_by_agent == '0')
 		  		<span class="tooltip-info" data-toggle="tooltip" title="{{ trans('panichd::lang.updated-by-other') }}"><i class="fas fa-user-edit"></i></span>
 		  @endif
-		  	--}}
           <span class="comment_title tooltip-info" data-toggle="tooltip" data-placement="bottom" title="{{ $comment_title }}"><span class="{{ $icon_class }}" aria-hidden="true"></span> {!! $comment_header !!}</span>
 
         </h6>

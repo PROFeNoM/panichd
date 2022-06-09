@@ -374,12 +374,14 @@ class TicketsController extends Controller
                 .'">'.$ticket->id
                 .'</div>';
 
+            /*
             if ($this->member->id == $ticket->agent_id) {
                 // For assigned agent: Mark ticket as read / unread
                 $column .= '<button class="btn btn-light btn-xs unread_toggle tooltip-info" data-ticket_id="'.$ticket->id.'" data-toggle="tooltip" '
                     .' title="'.($ticket->read_by_agent == '2' ? trans('panichd::lang.mark-as-read') : trans('panichd::lang.mark-as-unread')).'">'
                     .'<i class="fas '.($ticket->read_by_agent == '2' ? 'fa-user-lock' : ($ticket->read_by_agent == '1' ? 'fa-user' : 'fa-user-edit')).'"></i></button>';
             }
+            */
 
             $column .= '</div>';
 
