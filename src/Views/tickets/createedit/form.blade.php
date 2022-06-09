@@ -60,6 +60,12 @@
                     </select>
                 </div>
             </div>
+        @else
+            <select id="owner_id" name="owner_id" class="generate_default_select2 form-control" style="display: none; width: 100%">
+                <option style="display:none;" value="{{ $u->id }}" selected="selected">{{ $u->name . ($u->email == "" ? ' ' . trans('panichd::lang.ticket-owner-no-email') : ' - ' . $u->email }}
+                    {{ ' - ' . trans('panichd::lang.create-ticket-notices') . ' ' . $u->userDepartment->getFullName() }}
+                </option>
+            </select>
         @endif
 
         @if ($u->currentLevel() > 1)
