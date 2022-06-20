@@ -13,7 +13,7 @@ $summernoteVersion = PanicHD\PanicHD\Helpers\Cdn::Summernote;
 
 return [
     'status_notification' => '			<p>
-				<b>notification sur le statut</b>: envoyer des notifications par mel aux propriétaires et gestionnaires du ticket quand son statut change
+				<b>notification sur le statut</b>: envoyer des notifications par mail aux demandeur et gestionnaire du ticket quand son statut change
 			</p>
 			<p>
 				Par défaut, envoi de notifications: <code>1</code><br>
@@ -46,7 +46,7 @@ return [
     'default_status_id'                => 'Le statut par défaut des nouveaux tickets',
     'delete_modal_type'                => 'Choisissez le type de message de confirmation à utiliser pour confirmer une suppression<br /><code>builtin</code> : confirmation javascript<br /><code>modal</code> : message modal jquery',
     'departments_feature'              => 'Afficher les informations relatives au service des membres. Cette fonctionnalité est en cours de développement <a href="https://github.com/panichelpdesk/panichd/wiki/Under-development">comme décrit dans notre wiki</a><br /><code>0</code> : désactivé<br /><code>1</code> : activé',
-    'departments_notices_feature'      => 'Possibilité de lier des membres spécifiques à un département signalé. Si un ticket est créé avec l\'un de ces utilisateurs spéciaux comme propriétaire, tous les membres du département liés verront ce ticket comme un avis. Cette fonctionnalité est en cours de développement <a href="https://github.com/panichelpdesk/panichd/wiki/Under-development">comme décrit dans notre wiki</a><br /><code>0</code> : désactivé<br /><code>1</code> : activé',
+    'departments_notices_feature'      => 'Possibilité de lier des membres spécifiques à un département signalé. Si un ticket est créé avec l\'un de ces utilisateurs spéciaux comme demandeur, tous les membres du département liés verront ce ticket comme un avis. Cette fonctionnalité est en cours de développement <a href="https://github.com/panichelpdesk/panichd/wiki/Under-development">comme décrit dans notre wiki</a><br /><code>0</code> : désactivé<br /><code>1</code> : activé',
     'editor_enabled'                   => 'Activer l\'éditeur summernote sur les zones de texte',
     'editor_html_highlighter'          => 'Inclure ou non <a target="_blank" href="http://summernote.org/examples/#codemirror-as-codeview">surligneur de syntaxecodemirror</a><br /><code>0</code> : Ne pas inclure<br /><code>1</code> : Inclure',
     'email'                            => [
@@ -65,7 +65,7 @@ return [
         'header'           => '<p><img src="http://i.imgur.com/5aJjuZL.jpg"/></p>',
         'owner'            => [
             'newticket' => [
-                'template' => 'La notification au propriétaire du ticket utilise le modèle de lame d\'email spécifié ici',
+                'template' => 'La notification au demandeur du ticket utilise le modèle de lame d\'email spécifié ici',
             ],
         ],
         'signature'    => '<p><img src="http://i.imgur.com/coi3R63.jpg"/></p>',
@@ -74,10 +74,10 @@ return [
         'twitter_link' => '<p><b>Toogle icon link</b>: empty or string</p><p><img src="http://i.imgur.com/5JmkrF1.jpg"/></p>',
     ],
     'embedded_image_prefix'   => 'Les images incorporées dont la résolution dépasse la limite sont transformées en une pièce jointe nommée à l\'aide de ce préfixe et d\'une numérotation automatique.',
-    'html_replacements'       => 'Remplacement automatique des chaînes de caractères pour les champs HTML de contenu et d\'intervention',
+    'html_replacements'       => 'Remplacement automatique des chaînes de caractères pour les champs HTML de contenu et de prise en charge',
     'length_menu'             => 'Options pour le menu de pagination des tableaux',
-    'list_owner_notification' => 'Notifier le propriétaire lorsque la liste de tickets passe d\'active à complète ou vice versa<br /><code>0</code> : désactivé<br /><code>1</code> : activé',
-    'list_text_max_length'    => 'Longueur maximale visible pour les champs de description et d\'intervention. Si l\'un de ces champs est plus grand que ce paramètre, le texte sera coupé à cette longueur et un bouton pour afficher le texte complet sera affiché<br /><code>0</code> : Désactiver',
+    'list_owner_notification' => 'Notifier le demandeur lorsque la liste de tickets passe d\'active à complète ou vice versa<br /><code>0</code> : désactivé<br /><code>1</code> : activé',
+    'list_text_max_length'    => 'Longueur maximale visible pour les champs de description et de prise en charge. Si l\'un de ces champs est plus grand que ce paramètre, le texte sera coupé à cette longueur et un bouton pour afficher le texte complet sera affiché<br /><code>0</code> : Désactiver',
     'main_route'              => 'Préfixe PanicHD utilisé dans les noms de route Laravel (ex. route(\'<code>tickets</code>.index\'))',
     'main_route_path'         => 'Préfixe URL pour voir les billets (ex. http://hostname/<code>tickets</code>/)',
     'master_template'         => 'Le modèle que toutes les vues de PanicHD prolongeront.',
@@ -93,7 +93,7 @@ return [
 			<p><a target="_blank" href="http://htmlpurifier.org/docs">Purifier documentation</a></p>',
     'queue_emails'                 => 'Utiliser la méthode Queue lors de l\'envoi des emails (Mail::queue).<br /><code>0</code> : Notifier via Mail::send<br /><code>1</code> : Notifier via Laravel Mail::queue. Notez qu\'il nécessite d\'être configuré <a target="_blank" href="http://laravel.com/docs/master/queues">dans Laravel</a>.',
     'reopen_ticket_perm'           => 'Tableau spécifiant quels types de membres peuvent <b>réouvrir</b> un ticket.',
-    'status_owner_notification'    => 'Notifier le propriétaire lorsque le statut du ticket change<br /><code>0</code> : désactivé<br /><code>1</code> : activé. Nécessite que le paramètre <b>status_notification</b> soit également activé.',
+    'status_owner_notification'    => 'Notifier le demandeur lorsque le statut du ticket change<br /><code>0</code> : désactivé<br /><code>1</code> : activé. Nécessite que le paramètre <b>status_notification</b> soit également activé.',
     'subject_content_column'       => 'Regroupement des colonnes sujet et contenu dans un tableau<br /><code>0</code> : désactivé<br /><code>1</code> : activé',
     'summernote_locale'            => 'Quelle langue doit utiliser summernote js texteditor. Si la valeur est <code>laravel</code>, la locale définie dans <code>config/app.php</code> sera utilisée<br /><br />Exemple : <code>hu-HU</code> pour le hongrois. <a target="_blank" href="https://github.com/summernote/summernote/tree/master/lang">Voir les codes de langue disponibles</a>',
     'summernote_options_json_file' => 'App relative path for file that contains init values for summernote in JSON. <a target="_blank" href="http://summernote.org/deep-dive/#initialization-options">Voir les options disponibles</a><br /><code>default</code> : Charger les paramètres du fichier JSON\\summernote_init.json.',

@@ -351,7 +351,7 @@ class TicketsController extends Controller
         // method rawColumns was introduced in laravel-datatables 7, which is only compatible with >L5.4
         // in previous laravel-datatables versions escaping columns wasn't defaut
         if (LaravelVersion::min('5.4')) {
-            $a_raws = ['id', 'subject', 'intervention', 'status', 'agent', 'priority', 'owner_name', 'calendar', 'updated_at', 'complete_date', 'category', 'tags'];
+            $a_raws = ['id', 'subject', 'status', 'owner_name', 'priority', 'agent', 'intervention', 'calendar', 'updated_at', 'complete_date', 'category', 'tags'];
 
             if (Setting::grab('departments_feature')) {
                 $a_raws[] = 'dept_full_name';

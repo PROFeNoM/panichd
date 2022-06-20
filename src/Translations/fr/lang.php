@@ -22,11 +22,11 @@ return [
     // Tables
     'table-id'                         => '#',
     'table-subject'                    => 'Sujet',
-    'table-owner'                      => 'Propriétaire',
+    'table-owner'                      => 'Demandeur',
     'table-status'                     => 'Statut',
     'table-last-updated'               => 'Dernière mise à jour',
     'table-priority'                   => 'Priorité',
-    'table-agent'                      => 'Agent',
+    'table-agent'                      => 'Superviseur',
     'table-category'                   => 'Catégorie',
 
     // Datatables
@@ -58,8 +58,8 @@ return [
     'btn-submit'                       => 'Envoyer',
 
     'active-tickets-adjective'         => 'Ouvert',
-    'agent'                            => 'Agent',
-    'agents'                           => 'Agents',
+    'agent'                            => 'Superviseur',
+    'agents'                           => 'Superviseurs',
     'category'                         => 'Categorie',
     'colon'                            => ': ',
     'comments'                         => 'Commentaires',
@@ -68,7 +68,7 @@ return [
     'flash-x'                          => '×', // &times;
     'last-update'                      => 'Dernière mise à jour',
     'no-replies'                       => 'Pas de réponse',
-    'owner'                            => 'Propriétaire',
+    'owner'                            => 'Demandeur',
     'priority'                         => 'Priorité',
     'reopen-ticket'                    => 'Réouverture du Ticket',
     'reply'                            => 'Répondre',
@@ -82,7 +82,7 @@ return [
     // Tables
     'table-department'                 => 'Département',
     'table-description'                => 'Description',
-    'table-intervention'               => 'Intevention',
+    'table-intervention'               => 'Prise en charge',
     'table-calendar'                   => 'Calendrier',
     'table-completed_at'               => 'Fermé à',
     'table-tags'                       => 'Tags',
@@ -113,8 +113,8 @@ return [
     'calendar-scheduled-period'        => 'Programmé du :date1 au :date2',
 
     // Agent related
-    'table-change-agent'               => 'Changer l\'agent',
-    'table-one-agent'                  => 'Il y a un agent dans cette catégorie',
+    'table-change-agent'               => 'Changer le superviseur',
+    'table-one-agent'                  => 'Il y a un superviseur dans cette catégorie',
     'table-agent-status-check'         => 'Changer le status à ":status"',
 
     // list AJAX changes
@@ -125,7 +125,7 @@ return [
     'filter-removeall-title'           => 'Retirer tous les filtres',
     'filter-pov'                       => 'Voir en tant que',
     'filter-pov-member-title'          => 'Voir en tant que membre',
-    'filter-pov-agent-title'           => 'Voir en tant qu\'agent',
+    'filter-pov-agent-title'           => 'Voir en tant que superviseur',
     'filter-year-all'                  => 'Toute',
     'filter-calendar'                  => 'Calendrier',
     'filter-calendar-all'              => 'Tout',
@@ -140,7 +140,7 @@ return [
     'filter-category'                  => 'Catégorie',
     'filter-category-all'              => 'Toutes',
     'filter-owner-all'                 => 'Tous',
-    'filter-agent'                     => 'Agent',
+    'filter-agent'                     => 'Superviseur',
     'filter-agent-all'                 => 'Tous',
 
     'btn-add'                          => 'Ajouter',
@@ -169,7 +169,7 @@ return [
     'discard'                          => 'Annuler',
     'email'                            => 'E-mail',
     'email-resend-abbr'                => 'FW',
-    'intervention'                     => 'Intervention',
+    'intervention'                     => 'Prise en charge',
     'limit-date'                       => 'Date limite',
     'list'                             => 'Liste',
     'mark-complete'                    => 'Marquer comme fermé',
@@ -244,9 +244,9 @@ return [
     'administrators-is-removed-from-team'             => 'Le(s) administrateurs :name ont été retirés de l\'équipe des administrateurs', // New
 
     // AgentsController
-    'agents-are-added-to-agents'                      => 'Les agents :names ont été ajoutés comme agents',
+    'agents-are-added-to-agents'                      => 'Les superviseurs :names ont été ajoutés comme superviseurs',
     'agents-joined-categories-ok'                     => 'Catégorie jointe avec succès',
-    'agents-is-removed-from-team'                     => 'Le(s) agent\\s :name ont été retirés de l\'équipe des agents',
+    'agents-is-removed-from-team'                     => 'Le(s) superviseur\\s :name ont été retirés de l\'équipe des superviseurs',
 
     // CategoriesController
     'category-name-has-been-created'   => 'La catégorie :name a été créée !',
@@ -307,8 +307,8 @@ return [
     'reload-reloading'                 => 'La table des tickets recharge... Merci de patienter.',
 
     // Ticket forms messages
-    'update-agent-same'                => 'L\'agent n\'a pas été modifié ! Ticket <a href=":link" title=":title"><u>:name</u></a>',
-    'update-agent-ok'                  => 'Agent changé à ":new_agent" pour le ticket <a href=":link" title=":title"><u>:name</u></a>',
+    'update-agent-same'                => 'Le superviseur n\'a pas été modifié ! Ticket <a href=":link" title=":title"><u>:name</u></a>',
+    'update-agent-ok'                  => 'Superviseur changé à ":new_agent" pour le ticket <a href=":link" title=":title"><u>:name</u></a>',
     'update-priority-same'             => 'La priorité n\'a pas été modifiée ! Ticket <a href=":link" title=":title"><u>:name</u></a>',
     'update-priority-ok'               => 'La prorité a été changé à ":new" pour le ticket <a href=":link" title=":title"><u>:name</u></a>',
     'update-status-same'               => 'Le status n\'a pas été modifiée ! Ticket <a href=":link" title=":title"><u>:name</u></a>',
@@ -316,12 +316,12 @@ return [
 
     // tickets/create
     'create-ticket-notices'            => 'Avis',
-    'ticket-owner-deleted-warning'     => 'L\'utilisateur est supprimé et n\'apparaitra pas dans la liste d\'édition des propriétaires',
+    'ticket-owner-deleted-warning'     => 'L\'utilisateur est supprimé et n\'apparaitra pas dans la liste d\'édition des demandeurs',
     'ticket-owner-no-email'            => '(Aucun e-mail)',
     'ticket-owner-no-email-warning'    => 'L\'utilisateur n\'a pas d\'e-mail et ne recevra pas de notification.',
     'create-ticket-owner-help'         => 'Vous pouvez choisir de qui est le ticket ou qui est-ce qu\'il affecte',
     'create-ticket-visible'            => 'Visible',
-    'create-ticket-visible-help'       => 'Choix de la visibilité du ticket pour le propriétaire assigné',
+    'create-ticket-visible-help'       => 'Choix de la visibilité du ticket pour le demandeur assigné',
     'create-ticket-change-list'        => 'Changement de la liste',
     'create-ticket-info-start-date'    => 'Défaut: Maintenant',
     'create-ticket-info-limit-date'    => 'Défaut: Aucune limite',
@@ -347,8 +347,8 @@ return [
     'show-ticket-creator'              => 'Créé par',
     'show-ticket-modal-edit-fields'    => 'Editer plus de champs',
 
-    'show-ticket-modal-complete-blank-intervention-check' => 'Laisser vide si aucune intervention',
-    'show-ticket-complete-blank-intervention-alert'       => 'Pourterminer le ticket, vous devez confirmer que vous laissez l\'intervention vide',
+    'show-ticket-modal-complete-blank-intervention-check' => 'Laisser vide si aucune prise en charge',
+    'show-ticket-complete-blank-intervention-alert'       => 'Pourterminer le ticket, vous devez confirmer que vous laissez la prise en charge vide',
     'show-ticket-modal-complete-blank-reason-alert'       => 'Pour fermer le ticket, vous devez indiquer une raison.',
     'show-ticket-complete-bad-status'                     => 'Le ticket n\'a pas été fermé: Le statut indiqué n\'est pas valide',
     'show-ticket-complete-bad-reason-id'                  => 'Le ticket n\'a pas été fermé: La raison indiquée n\'est pas valide',
@@ -370,9 +370,9 @@ return [
     'ticket-hidden-button-title'    => 'Changer la visibilité utilisateur',
     'ticket-visibility-changed'     => 'La visibilité du ticket a été changée',
     'ticket-hidden-0-comment-title' => 'Changé à visible par <b>:agent</b>',
-    'ticket-hidden-0-comment'       => 'Le ticket est maintenant visible <b>visible</b> pour le propriétaire',
+    'ticket-hidden-0-comment'       => 'Le ticket est maintenant visible <b>visible</b> pour le demandeur',
     'ticket-hidden-1-comment-title' => 'Caché par <b>:agent</b>',
-    'ticket-hidden-1-comment'       => 'Le ticket est maintenant caché <b>hidden</b> pour le propriétaire',
+    'ticket-hidden-1-comment'       => 'Le ticket est maintenant caché <b>hidden</b> pour le demandeur',
 
     // Comments
     'comment'                    => 'Commenter',
@@ -398,17 +398,17 @@ return [
     'show-ticket-add-comment-reply'          => 'Répondre à l\'utilisateur',
     'show-ticket-add-comment-notificate'     => 'Notifier',
     'show-ticket-add-com-check-email-text'   => 'Ajouter un commentaire dans la notification utilisateur',
-    'show-ticket-add-com-check-intervention' => 'Ajouter ce texte dans le champ intervention (visible par l\'utilisateur)',
+    'show-ticket-add-com-check-intervention' => 'Ajouter ce texte dans le champ de prise en charge (visible par l\'utilisateur)',
     'show-ticket-add-com-check-resolve'      => 'Fermer le ticket et appliquer le statut',
-    'add-comment-confirm-blank-intervention' => 'Le champ "intervention" est vide. Souhaitez-vous fermer le ticket ?',
+    'add-comment-confirm-blank-intervention' => 'Le champ "prise en charge" est vide. Souhaitez-vous fermer le ticket ?',
 
     'edit-internal-note-title'         => 'Editer la note interne',
-    'show-ticket-edit-com-check-int'   => 'Ajouter du texte au champ intervention',
+    'show-ticket-edit-com-check-int'   => 'Ajouter du texte au champ prise en charge',
     'show-ticket-delete-comment'       => 'Supprimer le commentaire',
     'show-ticket-delete-comment-msg'   => 'Etes-vous sure de vouloir supprimer le commentaire ?',
     'show-ticket-email-resend'         => 'Renvoyer l\'email',
-    'show-ticket-email-resend-agent'   => '(Agent du ticket)',
-    'show-ticket-email-resend-owner'   => '(Propriétaire du ticket)',
+    'show-ticket-email-resend-agent'   => '(Superviseur du ticket)',
+    'show-ticket-email-resend-owner'   => '(Demandeur du ticket)',
     'notification-resend-confirmation' => 'Les notifications ont été renvoyées !',
     'notification-resend-no-recipients'=> 'Aucun destinataire n\'a été sélectionné !',
 
@@ -443,12 +443,12 @@ return [
     'searchform-created_at'           => 'Date de création',
     'searchform-completed_at'         => 'Date de complétion',
     'searchform-updated_at'           => 'Dernière mise-à-jour',
-    'searchform-read_by_agent'        => 'Vu par l\'agent assigné',
+    'searchform-read_by_agent'        => 'Vu par le superviseur assigné',
 
-    'searchform-help-creator'         => 'Personne ayant créé le ticket (Parfois un agent au nom d\'un membre)',
-    'searchform-help-owner'           => 'Membre propriétaire du ticket',
-    'searchform-help-department'      => 'Département propriétaire',
-    'searchform-help-any_text_field'  => 'Chercher dans le texte: Sujet, Description, Intervention, Commentaire ou Pièce-jointe',
+    'searchform-help-creator'         => 'Personne ayant créé le ticket (Parfois un superviseur au nom d\'un membre)',
+    'searchform-help-owner'           => 'Membre demandeur du ticket',
+    'searchform-help-department'      => 'Département demandeur',
+    'searchform-help-any_text_field'  => 'Chercher dans le texte: Sujet, Description, Prise en charge, Commentaire ou Pièce-jointe',
 
     'searchform-creator-none'         => '- vide -',
     'searchform-owner-none'           => '- vide -',
