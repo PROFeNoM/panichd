@@ -350,15 +350,13 @@ class TicketsController extends Controller
 
         // method rawColumns was introduced in laravel-datatables 7, which is only compatible with >L5.4
         // in previous laravel-datatables versions escaping columns wasn't defaut
-        if (LaravelVersion::min('5.4')) {
-            $a_raws = ['id', 'subject', 'status', 'owner_name', 'priority', 'agent', 'intervention', 'calendar', 'updated_at', 'complete_date', 'category', 'tags'];
+        $a_raws = ['id', 'subject', 'status', 'owner_name', 'priority', 'agent', 'intervention', 'calendar', 'updated_at', 'complete_date', 'category', 'tags'];
 
-            if (Setting::grab('departments_feature')) {
-                $a_raws[] = 'dept_full_name';
-            }
-
-            $collection->rawColumns($a_raws);
+        if (Setting::grab('departments_feature')) {
+            $a_raws[] = 'dept_full_name';
         }
+
+        $collection->rawColumns($a_raws);
 
         return $collection->make(true);
     }
@@ -439,32 +437,30 @@ class TicketsController extends Controller
             });
         }
 
-        $collection->editColumn('intervention', function ($ticket) {
-            if (Setting::grab('list_text_max_length') != 0 and strlen($ticket->intervention) > (Setting::grab('list_text_max_length') + 30)) {
-                $field = '<div class="ticket_text jquery_ticket_'.$ticket->id.'_text" data-height-plus="" data-height-minus="">'
-                    .'<span class="text_minus">...'.mb_substr($ticket->intervention, (mb_strlen($ticket->intervention) - Setting::grab('list_text_max_length'))).'</span>'
-                    .'<span class="text_plus" style="display: none">'.$ticket->intervention.'</span>'
-                    .' <button class="btn btn-light btn-xs jquery_ticket_text_toggle" data-id="'.$ticket->id.'"><span class="fa fa-plus"></span></button></div>';
+        $collection->editColumn('owner_name', function ($ticket) {
+            if ($ticket->owner_name == '') {
+                $return = trans('panichd::lang.deleted-member');
             } else {
-                $field = $ticket->intervention;
+                $return = str_replace(' ', '&nbsp;', $ticket->owner_name);
             }
 
-            if ($ticket->intervention != '' and ($ticket->comments_count > 0 or $ticket->hidden)) {
-                $field .= '<br />';
+            if ($ticket->owner_name == '' or is_null($ticket->owner)) {
+                $return = '<span class="tooltip-info" data-toggle="tooltip" data-placement="bottom" title="'.trans('panichd::lang.deleted-member').'">'
+                    .'<span class="fa fa-exclamation-circle text-danger"></span>'
+                    .'&nbsp;'.$return.'</span>';
             }
 
-            if ($ticket->hidden) {
-                $field .= '<span class="fa fa-eye-slash tooltip-info tickethidden" data-toggle="tooltip" title="'.trans('panichd::lang.ticket-hidden').'" style="margin: 0em 0.5em 0em 0em;"></span>';
+            if ($ticket->owner_name != '') {
+                if (Setting::grab('user_route') != 'disabled') {
+                    $return = '<a href="'.route(Setting::grab('user_route'), ['user' => $ticket->user_id]).'">'.$return.'</a>';
+                }
             }
 
-            if ($ticket->comments_count > 0) {
-                $field .= $ticket->comments_count.' <span class="fa fa-comments tooltip-info comment" title="'.trans('panichd::lang.table-info-comments-total', ['num'=>$ticket->comments_count]).($ticket->recent_comments_count > 0 ? ' '.trans('panichd::lang.table-info-comments-recent', ['num'=>$ticket->recent_comments_count]) : '').'"></span>';
-            }
-            if ($this->member->currentLevel() >= 2 and $ticket->internal_notes_count > 0) {
-                $field .= ' '.$ticket->internal_notes_count.' <span class="fa fa-pencil-alt tooltip-info comment" title="'.trans('panichd::lang.table-info-notes-total', ['num' => $ticket->internal_notes_count]).'"></span>';
+            if ($ticket->user_id != $ticket->creator_id) {
+                $return .= '&nbsp;<span class="fa fa-user tooltip-info" title="'.trans('panichd::lang.show-ticket-creator').trans('panichd::lang.colon').($ticket->creator_name == '' ? trans('panichd::lang.deleted-member') : (is_null($ticket->creator) ? $ticket->creator_name : $ticket->creator->name)).'" data-toggle="tooltip" data-placement="bottom" style="color: #aaa;"></span>';
             }
 
-            return $field;
+            return $return;
         });
 
         $a_statuses = Models\Status::orderBy('name', 'asc')->get();
@@ -485,6 +481,22 @@ class TicketsController extends Controller
             } else {
                 return '<span style="color: '.$ticket->color_status.'">'.e($ticket->status).'</span>';
             }
+        });
+
+        $a_priorities = Models\Priority::orderBy('magnitude', 'desc')->get();
+
+        $collection->editColumn('priority', function ($ticket) use ($a_priorities) {
+            $html = '';
+            foreach ($a_priorities as $priority) {
+                $html .= '<label style="color: '.$priority->color.'"><input type="radio" name="'.$ticket->id.'_priority" value="'.$priority->id.'"> '.$priority->name.'</label><br />';
+            }
+
+            $html = '<div>'.$html.'</div><br />'
+                .'<button type="button" class="btn btn-default btn-sm popover_submit" data-field="priority" data-ticket-id="'.$ticket->id.'">'.trans('panichd::lang.btn-change').'</button>';
+
+            return '<a href="#Priority" style="color: '.$ticket->color_priority.'" class="jquery_popover" data-toggle="popover" data-placement="bottom" title="'
+                .e('<button type="button" class="float-right" onclick="$(this).closest(\'.popover\').popover(\'hide\');">&times;</button> ')
+                .trans('panichd::lang.table-change-priority').'" data-content="'.e($html).'">'.e($ticket->priority).'</a>';
         });
 
         // Agents for each category
@@ -539,46 +551,32 @@ class TicketsController extends Controller
             return $text;
         });
 
-        $a_priorities = Models\Priority::orderBy('magnitude', 'desc')->get();
-
-        $collection->editColumn('priority', function ($ticket) use ($a_priorities) {
-            $html = '';
-            foreach ($a_priorities as $priority) {
-                $html .= '<label style="color: '.$priority->color.'"><input type="radio" name="'.$ticket->id.'_priority" value="'.$priority->id.'"> '.$priority->name.'</label><br />';
-            }
-
-            $html = '<div>'.$html.'</div><br />'
-                .'<button type="button" class="btn btn-default btn-sm popover_submit" data-field="priority" data-ticket-id="'.$ticket->id.'">'.trans('panichd::lang.btn-change').'</button>';
-
-            return '<a href="#Priority" style="color: '.$ticket->color_priority.'" class="jquery_popover" data-toggle="popover" data-placement="bottom" title="'
-                .e('<button type="button" class="float-right" onclick="$(this).closest(\'.popover\').popover(\'hide\');">&times;</button> ')
-                .trans('panichd::lang.table-change-priority').'" data-content="'.e($html).'">'.e($ticket->priority).'</a>';
-        });
-
-        $collection->editColumn('owner_name', function ($ticket) {
-            if ($ticket->owner_name == '') {
-                $return = trans('panichd::lang.deleted-member');
+        $collection->editColumn('intervention', function ($ticket) {
+            if (Setting::grab('list_text_max_length') != 0 and strlen($ticket->intervention) > (Setting::grab('list_text_max_length') + 30)) {
+                $field = '<div class="ticket_text jquery_ticket_'.$ticket->id.'_text" data-height-plus="" data-height-minus="">'
+                    .'<span class="text_minus">...'.mb_substr($ticket->intervention, (mb_strlen($ticket->intervention) - Setting::grab('list_text_max_length'))).'</span>'
+                    .'<span class="text_plus" style="display: none">'.$ticket->intervention.'</span>'
+                    .' <button class="btn btn-light btn-xs jquery_ticket_text_toggle" data-id="'.$ticket->id.'"><span class="fa fa-plus"></span></button></div>';
             } else {
-                $return = str_replace(' ', '&nbsp;', $ticket->owner_name);
+                $field = $ticket->intervention;
             }
 
-            if ($ticket->owner_name == '' or is_null($ticket->owner)) {
-                $return = '<span class="tooltip-info" data-toggle="tooltip" data-placement="bottom" title="'.trans('panichd::lang.deleted-member').'">'
-                    .'<span class="fa fa-exclamation-circle text-danger"></span>'
-                    .'&nbsp;'.$return.'</span>';
+            if ($ticket->intervention != '' and ($ticket->comments_count > 0 or $ticket->hidden)) {
+                $field .= '<br />';
             }
 
-            if ($ticket->owner_name != '') {
-                if (Setting::grab('user_route') != 'disabled') {
-                    $return = '<a href="'.route(Setting::grab('user_route'), ['user' => $ticket->user_id]).'">'.$return.'</a>';
-                }
+            if ($ticket->hidden) {
+                $field .= '<span class="fa fa-eye-slash tooltip-info tickethidden" data-toggle="tooltip" title="'.trans('panichd::lang.ticket-hidden').'" style="margin: 0em 0.5em 0em 0em;"></span>';
             }
 
-            if ($ticket->user_id != $ticket->creator_id) {
-                $return .= '&nbsp;<span class="fa fa-user tooltip-info" title="'.trans('panichd::lang.show-ticket-creator').trans('panichd::lang.colon').($ticket->creator_name == '' ? trans('panichd::lang.deleted-member') : (is_null($ticket->creator) ? $ticket->creator_name : $ticket->creator->name)).'" data-toggle="tooltip" data-placement="bottom" style="color: #aaa;"></span>';
+            if ($ticket->comments_count > 0) {
+                $field .= $ticket->comments_count.' <span class="fa fa-comments tooltip-info comment" title="'.trans('panichd::lang.table-info-comments-total', ['num'=>$ticket->comments_count]).($ticket->recent_comments_count > 0 ? ' '.trans('panichd::lang.table-info-comments-recent', ['num'=>$ticket->recent_comments_count]) : '').'"></span>';
+            }
+            if ($this->member->currentLevel() >= 2 and $ticket->internal_notes_count > 0) {
+                $field .= ' '.$ticket->internal_notes_count.' <span class="fa fa-pencil-alt tooltip-info comment" title="'.trans('panichd::lang.table-info-notes-total', ['num' => $ticket->internal_notes_count]).'"></span>';
             }
 
-            return $return;
+            return $field;
         });
 
         if (Setting::grab('departments_feature')) {
@@ -591,12 +589,6 @@ class TicketsController extends Controller
 
         $collection->editColumn('calendar', function ($ticket) {
             return '<div style="width: 8em;">'.$ticket->getCalendarInfo().'</div>';
-        });
-
-        $collection->editColumn('updated_at', function ($ticket) {
-            return '<div class="tooltip-info" data-toggle="tooltip" title="'
-                .trans('panichd::lang.updated-date', ['date' => Carbon::createFromFormat('Y-m-d H:i:s', $ticket->updated_at)->diffForHumans()])
-                .'" style="width: 3em;">'.$ticket->getUpdatedAbbr().'</div>';
         });
 
         $collection->editColumn('complete_date', function ($ticket) {
@@ -623,6 +615,12 @@ class TicketsController extends Controller
             }
 
             return $text;
+        });
+
+        $collection->editColumn('updated_at', function ($ticket) {
+            return '<div class="tooltip-info" data-toggle="tooltip" title="'
+                .trans('panichd::lang.updated-date', ['date' => Carbon::createFromFormat('Y-m-d H:i:s', $ticket->updated_at)->diffForHumans()])
+                .'" style="width: 3em;">'.$ticket->getUpdatedAbbr().'</div>';
         });
 
         return $collection;
