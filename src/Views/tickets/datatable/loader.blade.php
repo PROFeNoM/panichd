@@ -50,32 +50,41 @@
 			@if ($setting->grab('subject_content_column') == 'no')
 				{ data: 'content', name: 'content' },
 			@endif
-			{ data: 'intervention', name: 'intervention' },
-			{ data: 'status', name: 'panichd_statuses.name' },
-			@if (session('panichd_filter_agent')=="" && $u->currentLevel() > 1)
-				{ data: 'agent', name: 'agent.name' },
-			@endif
-			@if( $u->currentLevel() > 1 )
-				{ data: 'priority', name: 'panichd_priorities.name', "orderData": [1, 3, 4, 5], "orderSequence": ['desc', 'asc']},
-				@if (session('panichd_filter_owner')=="")
-					{ data: 'owner_name', name: '{{ $u->getTable() }}.name' },
-					@if ($setting::grab('departments_feature'))
-						{ data: 'dept_full_name', name: 'panichd_departments.name' },
-					@endif
-				@endif
-				@if ($ticketList == 'complete')
-					{ data: 'complete_date', name: 'completed_at', searchable: false, "orderSequence": [ "desc", "asc"] },
-				@else
-					{ data: 'calendar', name: 'calendar', searchable: false, "orderData": [4, 5], "orderSequence": ['desc', 'asc'] },
-				@endif
-			@endif
-			{ data: 'updated_at', name: 'panichd_tickets.updated_at', "orderSequence": [ "desc", "asc"] },
+
+            { data: 'status', name: 'panichd_statuses.name' },
+
+            @if( $u->currentLevel() > 1 )
+                @if (session('panichd_filter_owner')=="")
+                    { data: 'owner_name', name: '{{ $u->getTable() }}.name' },
+                    @if ($setting::grab('departments_feature'))
+                        { data: 'dept_full_name', name: 'panichd_departments.name' },
+                    @endif
+                    { data: 'priority', name: 'panichd_priorities.name', "orderData": [1, 3, 4, 5], "orderSequence": ['desc', 'asc']},
+                @endif
+            @endif
+
+            @if (session('panichd_filter_agent')=="" && $u->currentLevel() > 1)
+                { data: 'agent', name: 'agent.name' },
+            @endif
+
+            { data: 'intervention', name: 'intervention' },
+
+            @if( $u->currentLevel() > 1)
+                @if ($ticketList == 'complete')
+                    { data: 'complete_date', name: 'completed_at', searchable: false, "orderSequence": [ "desc", "asc"] },
+                @else
+                    { data: 'calendar', name: 'calendar', searchable: false, "orderData": [4, 5], "orderSequence": ['desc', 'asc'] },
+                @endif
+            @endif
+
 			@if( $u->currentLevel() > 1 )
 				@if (session('panichd_filter_category')=="")
 					{ data: 'category', name: 'panichd_categories.name' },
 				@endif
-				{ data: 'tags', name: 'panichd_tags.name' }
+				{ data: 'tags', name: 'panichd_tags.name' },
 			@endif
+
+            { data: 'updated_at', name: 'panichd_tickets.updated_at', "orderSequence": [ "desc", "asc"] },
 		],
 		@if($ticketList != 'newest')
 			@if( $u->currentLevel() > 1)
