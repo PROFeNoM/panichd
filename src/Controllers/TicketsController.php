@@ -350,7 +350,7 @@ class TicketsController extends Controller
 
         // method rawColumns was introduced in laravel-datatables 7, which is only compatible with >L5.4
         // in previous laravel-datatables versions escaping columns wasn't defaut
-        $a_raws = ['id', 'subject', 'status', 'owner_name', 'priority', 'agent', 'intervention', 'calendar', 'updated_at', 'complete_date', 'category', 'tags'];
+        $a_raws = ['id', 'last_admin_comment', 'subject', 'status', 'owner_name', 'priority', 'agent', 'intervention', 'calendar', 'updated_at', 'complete_date', 'category', 'tags'];
 
         if (Setting::grab('departments_feature')) {
             $a_raws[] = 'dept_full_name';
@@ -461,6 +461,34 @@ class TicketsController extends Controller
             }
 
             return $return;
+        });
+
+        $collection->editColumn('last_admin_comment', function ($ticket) {
+            $all_comments = $ticket->comments()->orderBy('created_at', 'desc');
+            $lastAdminComment = null;
+
+            foreach ($all_comments->get() as $comment) {
+                $commentRelatedUser = $comment->user();
+                if ($commentRelatedUser->isAdmin()) {
+                    $lastAdminComment = $comment;
+                    break;
+                }
+            }
+
+            if (Setting::grab('list_text_max_length') != 0 and strlen($lastAdminComment->content) > (Setting::grab('list_text_max_length') + 30)) {
+                $field = '<div class="ticket_text jquery_ticket_'.$ticket->id.'_text" data-height-plus="" data-height-minus="">'
+                    .'<span class="text_minus">'.mb_substr($lastAdminComment->content, 0, Setting::grab('list_text_max_length')).'...</span>'
+                    .'<span class="text_plus" style="display: none">'.$lastAdminComment->content.'</span>'
+                    .' <button class="btn btn-light btn-xs jquery_ticket_text_toggle" data-id="'.$ticket->id.'"><span class="fa fa-plus"></span></button></div>';
+            } else {
+                $field = $lastAdminComment->content;
+            }
+
+            if ($ticket->hidden) {
+                $field .= '<span class="fa fa-eye-slash tooltip-info tickethidden" data-toggle="tooltip" title="'.trans('panichd::lang.ticket-hidden').'" style="margin: 0em 0.5em 0em 0em;"></span>';
+            }
+
+            return $field;
         });
 
         $a_statuses = Models\Status::orderBy('name', 'asc')->get();

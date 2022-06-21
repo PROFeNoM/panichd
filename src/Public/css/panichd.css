@@ -27,16 +27,16 @@ body {
 
 /* Titles */
 h1, h2, h3, h4, h5, h6 {
-    font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
-    font-weight: 300;
-    color: #636363;
+	font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
+	font-weight: 300;
+	color: #636363;
 }
 
 .btn-xs {
-	padding  : .4rem;
-	font-size  : .9rem;
-	line-height  : .5rem;
-	border-radius : .2rem;
+	padding: .4rem;
+	font-size: .9rem;
+	line-height: .5rem;
+	border-radius: .2rem;
 }
 
 .form-group .fa {
@@ -51,6 +51,7 @@ h1, h2, h3, h4, h5, h6 {
 .form-group.row.bg-info label.col-form-label {
 	font-weight: bold;
 }
+
 .form-group.row.bg-info label {
 	color: white;
 }
@@ -61,7 +62,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #filter_panel .btn-light .badge {
-	background-color: #bbb ;
+	background-color: #bbb;
 }
 
 #filter_panel .card-body {
@@ -124,6 +125,7 @@ h1, h2, h3, h4, h5, h6 {
 	background-color: transparent;
 	border-color: transparent;
 }
+
 #tickets-table .unread_toggle .fa-user {
 	color: #ccc;
 }
@@ -164,10 +166,6 @@ h1, h2, h3, h4, h5, h6 {
 	padding: 2px 6px;
 }
 
-#panichd_content .select2-selection__arrow {
-	top: 3px !important;
-}
-
 #panichd_content .select2-container *:focus {
 	outline: none;
 }
@@ -177,12 +175,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #panichd_content .select2-results__option[aria-selected=true] {
-    color: #555;
+	color: #555;
 	font-weight: bold;
 	background: white !important;
 }
+
 #panichd_content .select2-results__option--highlighted {
-    color: black !important;
+	color: black !important;
 	background: #eee !important;
 }
 
@@ -194,15 +193,19 @@ h1, h2, h3, h4, h5, h6 {
 	display: inline-block;
 	font-size: 0.8em;
 }
+
 #panichd_content #select_agent {
 	display: none; /* don't show select until it is rendered */
 }
+
 #panichd_content .select2_filter #select2-select_agent-container {
 	border-radius: 4px;
 }
+
 #panichd_content .select2_filter * {
 	outline: none;
 }
+
 #panichd_content .select2_filter .select2-selection--single {
 	color: #666;
 	font-weight: bold;
@@ -250,20 +253,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #tickets-table .jquery_ticket_text_toggle {
-  color: #999;
-  border-color: transparent;
-  background-color: transparent;
+	color: #999;
+	border-color: transparent;
+	background-color: transparent;
 }
 
 #tickets-table .jquery_ticket_text_toggle:hover {
-  background-color: #eee;
+	background-color: #eee;
 }
 
 /*
  * Ticket show
 */
 /* sm and up */
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1200px) {
 	#ticket-body .row.row-eq-height {
 		display: -webkit-box;
 		display: -webkit-flex;
@@ -277,7 +280,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-@media screen and (max-width: 1999px){
+@media screen and (max-width: 1999px) {
 	#ticket-body .row-ticket-attachments {
 		margin: 15px -15px 5px -15px;
 	}
@@ -287,6 +290,7 @@ h1, h2, h3, h4, h5, h6 {
 .btn.btn-tag {
 	border: transparent;
 }
+
 .btn-tag.btn-xs {
 	line-height: 0.9rem;
 }
@@ -315,6 +319,7 @@ h1, h2, h3, h4, h5, h6 {
 .grouped_check_list.deletion_list .check_parent.unchecked .fa-check, .grouped_check_list.deletion_list .check_parent.checked .fa-times {
 	display: none;
 }
+
 .grouped_check_list.deletion_list .check_parent.checked .fa-check, .grouped_check_list.deletion_list .check_parent.unchecked .fa-times {
 	display: inline !important;
 }
@@ -347,6 +352,7 @@ h1, h2, h3, h4, h5, h6 {
 .grouped_check_list.coloured-list .check_parent.unchecked .btn-light {
 	color: gray;
 }
+
 .grouped_check_list.coloured-list .check_parent.unchecked .check_info {
 	background: white;
 }
@@ -354,9 +360,11 @@ h1, h2, h3, h4, h5, h6 {
 .grouped_check_list.coloured-list .check_parent.checked a.btn-light {
 	color: #00e600;
 }
+
 .grouped_check_list.coloured-list .check_parent.checked .check_info {
 	color: black;
 }
+
 .grouped_check_list.coloured-list .check_parent.checked .check_info {
 	background: #f2ffe6;
 }
@@ -401,6 +409,7 @@ h1, h2, h3, h4, h5, h6 {
 .jquery_error .form-control, .jquery_error .note-editor, .jquery_error .jquery_attachment_block {
 	border: 1px solid red !important;
 }
+
 .jquery_error .jquery_error_text {
 	display: block;
 	color: red;
@@ -608,4 +617,11 @@ table.dataTable thead > tr > th.sorting_asc, table.dataTable thead > tr > th.sor
 		-webkit-transform: scale(3.5); /* Chrome, Safari, Opera */
 		transform: scale(3.5);
 	}
+}
+
+.note-editor.note-airframe .note-editing-area .note-editable, .note-editor.note-frame .note-editing-area .note-editable {
+	padding: 10px;
+	overflow: auto;
+	word-wrap: break-word;
+	height: 40vh;
 }

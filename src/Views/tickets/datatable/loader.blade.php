@@ -51,6 +51,10 @@
 				{ data: 'content', name: 'content' },
 			@endif
 
+            @if ( !$u->isAdmin() )
+                { data: 'last_admin_comment', name: 'last_admin_comment' },
+            @endif
+
             { data: 'status', name: 'panichd_statuses.name' },
 
             @if( $u->currentLevel() > 1 )
