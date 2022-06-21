@@ -72,7 +72,7 @@ return [
     'priority'                         => 'Priorité',
     'reopen-ticket'                    => 'Réouverture du Ticket',
     'reply'                            => 'Répondre',
-    'responsible'                      => 'Responsable',
+    'responsible'                      => 'Superviseur',
     'status'                           => 'Statut',
     'subject'                          => 'Sujet',
 
