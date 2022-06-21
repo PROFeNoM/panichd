@@ -475,14 +475,20 @@ class TicketsController extends Controller
                 }
             }
 
-            if (Setting::grab('list_text_max_length') != 0 and strlen($lastAdminComment->content) > (Setting::grab('list_text_max_length') + 30)) {
-                $field = '<div class="ticket_text jquery_ticket_'.$ticket->id.'_text" data-height-plus="" data-height-minus="">'
-                    .'<span class="text_minus">'.mb_substr($lastAdminComment->content, 0, Setting::grab('list_text_max_length')).'...</span>'
-                    .'<span class="text_plus" style="display: none">'.$lastAdminComment->content.'</span>'
-                    .' <button class="btn btn-light btn-xs jquery_ticket_text_toggle" data-id="'.$ticket->id.'"><span class="fa fa-plus"></span></button></div>';
+
+            if ($lastAdminComment != null) {
+                if (Setting::grab('list_text_max_length') != 0 and strlen($lastAdminComment->content) > (Setting::grab('list_text_max_length') + 30)) {
+                    $field = '<div class="ticket_text jquery_ticket_' . $ticket->id . '_text" data-height-plus="" data-height-minus="">'
+                        . '<span class="text_minus">' . mb_substr($lastAdminComment->content, 0, Setting::grab('list_text_max_length')) . '...</span>'
+                        . '<span class="text_plus" style="display: none">' . $lastAdminComment->content . '</span>'
+                        . ' <button class="btn btn-light btn-xs jquery_ticket_text_toggle" data-id="' . $ticket->id . '"><span class="fa fa-plus"></span></button></div>';
+                } else {
+                    $field = $lastAdminComment->content;
+                }
             } else {
-                $field = $lastAdminComment->content;
+                $field = '';
             }
+
 
             if ($ticket->hidden) {
                 $field .= '<span class="fa fa-eye-slash tooltip-info tickethidden" data-toggle="tooltip" title="'.trans('panichd::lang.ticket-hidden').'" style="margin: 0em 0.5em 0em 0em;"></span>';
