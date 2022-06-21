@@ -467,8 +467,8 @@ class TicketsController extends Controller
             $all_comments = $ticket->comments()->orderBy('created_at', 'desc');
             $lastAdminComment = null;
 
-            foreach ($all_comments->get() as $comment) {
-                $commentRelatedUser = $comment->user();
+            foreach ($all_comments->get() as $comment) {;
+                $commentRelatedUser = \PanicHDMember::findOrFail($comment->user()->id);
                 if ($commentRelatedUser->isAdmin()) {
                     $lastAdminComment = $comment;
                     break;
