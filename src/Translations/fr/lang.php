@@ -326,7 +326,7 @@ return [
     'create-ticket-info-start-date'    => 'Défaut: Maintenant',
     'create-ticket-info-limit-date'    => 'Défaut: Aucune limite',
     'create-ticket-intervention-help'  => 'Actions prises pour la résolution du ticket',
-    'create-ticket-switch-to-note'     => 'Changer à note interne',
+    'create-ticket-switch-to-note'     => 'Changer à note non diffusée',
     'create-ticket-switch-to-comment'  => 'Changer à répondre à l\'utilisateur',
 
     'attach-files'                     => 'Attacher des fichiers',
@@ -376,7 +376,7 @@ return [
 
     // Comments
     'comment'                    => 'Commenter',
-    'note'                       => 'Note interne',
+    'note'                       => 'Note non diffusée',
     'comment-reply-title'        => 'Message visible pour les utilisateurs',
     'comment-reply-from-owner'   => 'Réponse de <b>:owner</b>',
     'reply-from-owner-to'        => 'Réponse de <b>:owner</b> à <b>:recipients</b>',
@@ -392,9 +392,9 @@ return [
     'comment-reopen-by'          => 'Réouverture par <b>:owner</b>',
 
     'show-ticket-add-comment'                => 'Ajouter un commentaire',
-    'show-ticket-add-note'                   => 'AJouter une note interne',
+    'show-ticket-add-note'                   => 'Ajouter une note non diffusée',
     'show-ticket-add-comment-type'           => 'Type',
-    'show-ticket-add-comment-note'           => 'Note interne',
+    'show-ticket-add-comment-note'           => 'Note non diffusée',
     'show-ticket-add-comment-reply'          => 'Répondre à l\'utilisateur',
     'show-ticket-add-comment-notificate'     => 'Notifier',
     'show-ticket-add-com-check-email-text'   => 'Ajouter un commentaire dans la notification utilisateur',
@@ -402,7 +402,7 @@ return [
     'show-ticket-add-com-check-resolve'      => 'Fermer le ticket et appliquer le statut',
     'add-comment-confirm-blank-intervention' => 'Le champ "prise en charge" est vide. Souhaitez-vous fermer le ticket ?',
 
-    'edit-internal-note-title'         => 'Editer la note interne',
+    'edit-internal-note-title'         => 'Editer la note non diffusée',
     'show-ticket-edit-com-check-int'   => 'Ajouter du texte au champ prise en charge',
     'show-ticket-delete-comment'       => 'Supprimer le commentaire',
     'show-ticket-delete-comment-msg'   => 'Etes-vous sure de vouloir supprimer le commentaire ?',
