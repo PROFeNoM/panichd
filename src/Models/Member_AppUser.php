@@ -10,9 +10,4 @@ class Member_AppUser extends User
     use MemberTrait;
 
     protected $table = 'users';
-
-    public function getNameAttribute(): string
-    {
-        return $this->sap_username;
-    }
 }

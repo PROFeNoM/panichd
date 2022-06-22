@@ -295,7 +295,7 @@ class TicketsController extends Controller
             'agent.name as agent_name',
             'panichd_priorities.name AS priority',
             'panichd_priorities.magnitude AS priority_magnitude',
-            'members.name AS owner_name',
+            'members.sap_username AS owner_name',
             'creator.name as creator_name',
             'panichd_tickets.user_id',
             'panichd_tickets.creator_id',

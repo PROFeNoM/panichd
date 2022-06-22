@@ -13,7 +13,9 @@
         @endif
 
         <td>{{ trans('panichd::lang.table-subject') }}</td>  <!-- Sujet -->
-        <td>{{ trans('panichd::lang.table-admin-comments') }}</td>  <!-- Commentaire administrateur -->
+        @if ( !$u->isAdmin())
+            <td>{{ trans('panichd::lang.table-admin-comments') }}</td>  <!-- Commentaire administrateur -->
+        @endif
         <td>{{ trans('panichd::lang.table-status') }}</td>  <!-- Status -->
 
         @if ($setting->grab('subject_content_column') == 'no')
