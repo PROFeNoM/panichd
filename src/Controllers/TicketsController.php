@@ -464,16 +464,12 @@ class TicketsController extends Controller
         });
 
         $collection->editColumn('last_admin_comment', function ($ticket) {
-            $all_comments = $ticket->comments()->orderBy('created_at', 'desc');
-            $lastAdminComment = null;
-
-            foreach ($all_comments->get() as $comment) {;
-                $commentRelatedUser = \PanicHDMember::findOrFail($comment->user_id);
-                if ($commentRelatedUser->isAdmin()) {
-                    $lastAdminComment = $comment;
-                    break;
-                }
-            }
+            $lastAdminComment = $ticket->comments
+                ->filter(function ($comment) {
+                    return $comment->user->isAdmin();
+                })
+                ->sortByDesc('created_at')
+                ->first();
 
 
             if ($lastAdminComment != null) {

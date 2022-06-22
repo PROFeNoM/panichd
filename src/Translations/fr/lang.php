@@ -28,6 +28,7 @@ return [
     'table-priority'                   => 'Priorité',
     'table-agent'                      => 'Superviseur',
     'table-category'                   => 'Catégorie',
+    'table-admin-comments'             => 'Dernier commentaire Administrateur',
 
     // Datatables
     'table-decimal'                    => '',

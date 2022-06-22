@@ -64,13 +64,21 @@
       <div class="card-header pt-2 pr-3 pb-1 pl-2">
         <h6 class="card-title mb-0 @if($u->id == $ticket->agent_id && $comment->read_by_agent != '1') text-white @endif">
           <span class="float-right">
-            <span class="tooltip-info" data-toggle="tooltip" data-placement="top" title="{{ trans('panichd::lang.creation-date', [
-            'date' => \Carbon\Carbon::parse($comment->created_at)->format(trans('panichd::lang.datetime-format'))
-            ]) }}">
+			  @php
+                $from = \Carbon\Carbon::parse($comment->created_at)->format(trans('panichd::lang.datetime-format'));
+                $now =  \Carbon\Carbon::now()->format(trans('panichd::lang.datetime-format'));
+                $diff_in_days = $now->diffInDays($from);
+			  @endphp
+            <span class="tooltip-info" data-toggle="tooltip" data-placement="top"
+                  title="{{ trans('panichd::lang.creation-date', ['date' => $from]) }}">
                 @if ($comment->created_at!=$comment->updated_at)
                     <span class="fa fa-pencil-alt" aria-hidden="true" style="color: gray"></span>
                 @endif
-                {!! $comment->updated_at->diffForHumans() !!}
+                @if($diff_in_days >= 1)
+                    {!! trans('panichd::lang.creation-date', ['date' => $from]) !!}
+                @else
+                    {!! $comment->updated_at->diffForHumans() !!}
+                @endif
             </span>
             @if ($u->currentLevel() > 1 && $u->canManageTicket($ticket->id) and $comment->type=='note')
                 <button type="button" class="btn btn-light btn-sm comment_deleteit"  data-toggle="modal" data-target="#modal-comment-delete" data-id="{{$comment->id}}" data-text="{{$comment->user->name}}" title="{{ trans('panichd::lang.show-ticket-delete-comment') }}">
