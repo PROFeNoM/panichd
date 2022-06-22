@@ -52,6 +52,22 @@ class Basic extends Seeder
             $super_admin->save();
         }
 
+        // Retrieve key-user users and set panichd_admin and panichd_agent to 1
+        $key_users = Member::where('role_slug', 'key_user')->get();
+        foreach ($key_users as $key_user) {
+            $key_user->panichd_admin = 1;
+            $key_user->panichd_agent = 1;
+            $key_user->save();
+        }
+
+        // Retrieve key-user users and set panichd_admin and panichd_agent to 1
+        $admins = Member::where('role_slug', 'admin')->get();
+        foreach ($admins as $admin) {
+            $admin->panichd_admin = 1;
+            $admin->panichd_agent = 1;
+            $admin->save();
+        }
+
         // Create categories
         foreach ($this->categories as $name => $color) {
             $category = Category::firstOrNew(['name' => $name]);
