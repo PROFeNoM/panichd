@@ -40,13 +40,11 @@
 			{ data: 'priority_magnitude', name: 'panichd_priorities.magnitude', visible: false, searchable: false },
 			{ data: 'updated_at', name: 'panichd_tickets.updated_at', visible: false },
 			{ data: 'has_limit', name: 'has_limit', visible: false, searchable: false },
-			{ data: 'inverse_limit_date', name: 'inverse_limit_date', visible: false, searchable: false },
-			{ data: 'inverse_start_date', name: 'inverse_start_date', visible: false, searchable: false },
-            @if ($setting->grab('departments_feature'))
-                { data: 'dep_ancestor_name', name: 'dep_ancestor.name', visible: false },
-            @endif
+			//{ data: 'inverse_limit_date', name: 'inverse_limit_date', visible: false, searchable: false },
+            //{ data: 'inverse_start_date', name: 'inverse_start_date', visible: false, searchable: false },
+            //{ data: 'dep_ancestor_name', name: 'dep_ancestor.name', visible: false },
 
-			{ data: 'subject', name: 'subject' },
+            //{ data: 'subject', name: 'subject' },
 			@if ($setting->grab('subject_content_column') == 'no')
 				{ data: 'content', name: 'content' },
 			@endif
@@ -71,7 +69,7 @@
                 { data: 'agent', name: 'agent.name' },
             @endif
 
-            { data: 'intervention', name: 'intervention' },
+            //{ data: 'intervention', name: 'intervention' },
 
             @if( $u->currentLevel() > 1)
                 @if ($ticketList == 'complete')
