@@ -16,7 +16,7 @@ Route::group(['middleware' => \PanicHD\PanicHD\Helpers\LaravelVersion::authMiddl
         ->name("$main_route-complete");
 
     // Ticket data loaded by Datatables
-    Route::get("$main_route_path/data/{id?}", 'PanicHD\PanicHD\Controllers\TicketsController@data')
+    Route::post("$main_route_path/data/{id?}", 'PanicHD\PanicHD\Controllers\TicketsController@data')
         ->name("$main_route.data");
 
     // Search page (Blank form or with search parameters in URL)
