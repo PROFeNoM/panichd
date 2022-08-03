@@ -8,7 +8,7 @@
 		responsive: true,
 		pageLength: {{ $setting->grab('paginate_items') }},
 		lengthMenu: {{ json_encode($setting->grab('length_menu')) }},
-		ajax: { url: '{!! route($setting->grab('main_route').'.data', $ticketList) !!}', type: 'POST', data: function ( d ) { d._token = "{{ csrf_token() }}"; } },
+		ajax: { url: '{!! route($setting->grab('main_route').'.data', $ticketList) !!}', type: 'POST' },
 		language: {
 			decimal:        "{{ trans('panichd::lang.table-decimal') }}",
 			emptyTable:     "{{ trans('panichd::lang.table-empty') }}",
