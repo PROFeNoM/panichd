@@ -8,13 +8,7 @@
 		responsive: true,
 		pageLength: {{ $setting->grab('paginate_items') }},
 		lengthMenu: {{ json_encode($setting->grab('length_menu')) }},
-		ajax: {
-            url: '{!! route($setting->grab('main_route').'.data', $ticketList) !!}',
-            type: 'POST',
-            data: function ( d ) {
-                d._token = "{{ csrf_token() }}";
-            }
-        },
+		ajax: { url: '{!! route($setting->grab('main_route').'.data', $ticketList) !!}', type: 'POST', data: function ( d ) { d._token = "{{ csrf_token() }}"; } },
 		language: {
 			decimal:        "{{ trans('panichd::lang.table-decimal') }}",
 			emptyTable:     "{{ trans('panichd::lang.table-empty') }}",
@@ -47,11 +41,12 @@
 			{ data: 'updated_at', name: 'panichd_tickets.updated_at', visible: false },
 			{ data: 'has_limit', name: 'has_limit', visible: false, searchable: false },
 			{ data: 'inverse_limit_date', name: 'inverse_limit_date', visible: false, searchable: false },
-            { data: 'inverse_start_date', name: 'inverse_start_date', visible: false, searchable: false },
+			{ data: 'inverse_start_date', name: 'inverse_start_date', visible: false, searchable: false },
             @if ($setting->grab('departments_feature'))
                 { data: 'dep_ancestor_name', name: 'dep_ancestor.name', visible: false },
             @endif
-            { data: 'subject', name: 'subject' },
+
+			{ data: 'subject', name: 'subject' },
 			@if ($setting->grab('subject_content_column') == 'no')
 				{ data: 'content', name: 'content' },
 			@endif
