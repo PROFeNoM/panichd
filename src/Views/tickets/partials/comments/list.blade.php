@@ -65,8 +65,10 @@
         <h6 class="card-title mb-0 @if($u->id == $ticket->agent_id && $comment->read_by_agent != '1') text-white @endif">
           <span class="float-right">
 			  @php
-                $from = \Carbon\Carbon::parse($comment->created_at)->format(trans('panichd::lang.datetime-format'));
-                $now =  \Carbon\Carbon::now()->format(trans('panichd::lang.datetime-format'));
+			    $rawFrom = \Carbon\Carbon::parse($comment->created_at);
+			    $rawNow = \Carbon\Carbon::now();
+                $from = $rawFrom->format(trans('panichd::lang.datetime-format'));
+                $now =  $rawNow->format(trans('panichd::lang.datetime-format'));
                 $diff_in_days = $now->diffInDays($from);
 			  @endphp
             <span class="tooltip-info" data-toggle="tooltip" data-placement="top"
