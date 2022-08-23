@@ -52,7 +52,7 @@
 			@endif
 
             @if ( !$u->isAdmin() )
-                { data: 'last_admin_comment', name: 'last_admin_comment' },
+                { data: 'last_admin_comment', name: 'last_admin_comment', sortable: false },
             @endif
 
             { data: 'status', name: 'panichd_statuses.name' },
